@@ -24,8 +24,4 @@ const loginTransformObj = (obj, objData) => {
   objData.append('password', obj['password'])
 }
 
-const removeFromObj = (obj) => {
-  for (const key of Array.from(obj.keys())) {
-    obj.delete(key);
-  }
-};
+
