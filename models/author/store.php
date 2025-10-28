@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 ],
                 'message' => 'Novi author je dodat'
             ]);
-            opertionSuccess();
+            operationSuccess();
         } catch (PDOException $th) {
             intervalError($th->getMessage());
         }
