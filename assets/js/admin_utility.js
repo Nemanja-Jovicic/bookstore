@@ -396,8 +396,9 @@ const filterData = (pageLink = 0, entity, obj) => {
   sendGetRequest(url, objFormData);
 };
 
-const connectFilter = () => {
+const connectFilter = (adminObj) => {
   if (localStorage.getItem("key") !== null) {
+    console.log(document.querySelector("#keyword"));
     document.querySelector("#keyword").value = localStorage.getItem("key");
   }
   if (localStorage.getItem("link")) {
@@ -407,4 +408,10 @@ const connectFilter = () => {
       localStorage.getItem("link") !== null ? localStorage.getItem("link") : 0;
     links[link].classList.add("active");
   }
+  filterData(localStorage.getItem("link"), "book", adminObj);
+};
+
+const clearLocalStorage = () => {
+  localStorage.getItem("key") !== null ? localStorage.removeItem("key") : "";
+  localStorage.getItem("link") !== null ? localStorage.removeItem("link") : "";
 };
