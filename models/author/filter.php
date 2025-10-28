@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         echo json_encode([
             'data' => [
                 'data' => getAllAuthors($link),
-                'pages' => paginationAuthor()
+                'pages' => paginationAuthor(),
+                'link' => $link
             ]
         ]);
     } catch (PDOException $th) {
