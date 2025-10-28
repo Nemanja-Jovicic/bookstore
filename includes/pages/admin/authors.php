@@ -39,7 +39,7 @@ $pages = paginationAuthor();
             <nav aria-label="Page navigation example">
                 <ul class="pagination mt-2 d-flex justify-content-center" id="author_pagination">
                     <?php for ($i = 0; $i < $pages; $i++): ?>
-                        <li class="page-item"><a class="page-link page-author <?= $i == 0 ? 'active' : '' ?>" href="#"
+                        <li class="page-item"><a class="page-link  <?= $i == 0 ? 'active' : '' ?> page-author" href="#"
                                 data-link="<?= $i ?>"><?= $i + 1 ?></a></li>
                     <?php endfor; ?>
                 </ul>
