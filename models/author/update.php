@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         try {
             require_once '../../config/connection.php';
             updateAuthor($id, $first_name, $last_name);
-            echo json_encode(['data' => $getOneAuthorFullRow($id)]);
+            echo json_encode(['data' => $getOneAuthorFullRow($id), 'message' => 'Autor je izmenjen']);
         } catch (PDOException $th) {
             intervalError($th->getMessage());
         }
