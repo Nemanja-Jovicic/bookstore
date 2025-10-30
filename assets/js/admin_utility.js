@@ -44,6 +44,9 @@ const fillForm = (data, entity) => {
     case "edition":
       editionFillForm(data);
       break;
+    case "message":
+      messageFillDialog(data);
+      break;
   }
 };
 const authorFillForm = (data) => {
@@ -105,6 +108,14 @@ const editionFillForm = (data) => {
   let image = document.querySelector("#cover_img");
   image.classList.remove("d-none");
   image.src = `assets/images/normal/${image_path}`;
+};
+const messageFillDialog = (data) => {
+  const { id, first_name, last_name, email, created_at, message } = data;
+  console.log(data);
+  document.querySelector("#userFrom").innerHTML = first_name + " " + last_name;
+  document.querySelector("#emailFrom").innerHTML = email;
+  document.querySelector("#arrivedAt").innerHTML = formatDate(created_at);
+  document.querySelector("#message_content").textContent = message;
 };
 // clear functions
 
