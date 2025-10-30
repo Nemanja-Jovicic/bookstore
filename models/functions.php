@@ -269,8 +269,8 @@ function resizeImage($image_path,$image_name, $image_type)
 {
    list($width, $height) = getimagesize($image_path);
 
-    $normalHeight = 300;
-    $smallHeight = 150;
+    $normalHeight = 350;
+    $smallHeight = 200;
 
     $normalWidth = $width * ($normalHeight / $height);
     $smallWidth = $width * ($smallHeight / $height);
@@ -298,6 +298,18 @@ function resizeImage($image_path,$image_name, $image_type)
     } else if ($image_type === 'image/png') {
         imagepng($normal_canvas, $normalPath);
         imagepng($small_canvas, $smallPath);
+    }
+}
+
+function removeOldImage($old_image){
+    if(file_exists("../../assets/images/normal/$old_image")){
+        unlink("../../assets/images/normal/$old_image");
+    }
+    if(file_exists("../../assets/images/big/$old_image")){
+        unlink("../../assets/images/big/$old_image");
+    }
+    if(file_exists("../../assets/images/small/$old_image")){
+        unlink("../../assets/images/small/$old_image");
     }
 }
 
@@ -445,4 +457,24 @@ function updateBookEdition($id, $publisher_id, $cover_id, $letter_id, $genres, $
     } else {
         $connection->rollBack();
     }
+}
+// messages 
+function getAllMessages($limit  =0){
+    $query = "select * From message";
+    $offset = (int)ADMIN_OFFSET;
+    $limit = (int)$limit * (int)$offset;
+    $query.= " limit $limit, $offset";
+    return getAll($query);
+}
+function paginationMessages(){
+    $query = "select count(*) as numberOfElements from message";
+    return pagination($query);
+}
+function getOneMessage($id){
+    $query = "select id, first_name, last_name, email, message from messages where id = '$id'";
+    return getOneRow($query);
+}
+function getOneMessageFullRow($id){
+    $query = "select id, first_name, last_name, email, created_at, message from message where id = '$id'";
+    return getOneRow($query);
 }
