@@ -65,7 +65,7 @@ const editionFormValidation = (data, errors) => {
   const {id, cover_type, letter_type, pubilsher, price, authors, genres, img_cover, description, validation_description} = data
 
   const regPrice = /^[1-9]{1}[\d]{2,5}$/
-  const regDescription = /^[A-Za-zČĆŽŠĐčćžšđ0-9\s.,!?()'"-]{10,500}$/
+  const regDescription = /^[\p{L}\p{N}\s.,!?()'"-:]{10,2000}$/u
 
   selectFieldValidation(cover_type, "cover_type_error", "Morate odabrati tip korica!", errors)
   selectFieldValidation(letter_type, "letter_type_error", "Morate odabrati pismo!", errors)
