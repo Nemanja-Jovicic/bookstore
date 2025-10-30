@@ -51,7 +51,7 @@ function editionValidation($publisher, $cover_type, $letter_type, $genres, $auth
 
 
     $regPrice = "/^[1-9]{1}[\d]{2,5}$/";
-    $regDescription = "/^[A-Za-zČĆŽŠĐčćžšđ0-9\s.,!?()'\"-]{10,500}$/";
+    $regDescription = "/^[\p{L}\p{N}\s.,!?()'\"-:]{10,2000}$/u";
 
 
     inputSelectValidation($publisher, "Morate izabrati izdavaca!", $errors);
