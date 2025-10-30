@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 $image_name = '';
                 if($image !== ''){
                     $image_name = moveImage($image);
-                    
+                    removeOldImage($cover);
                 }
                 updateBookEdition($id, $publisher, $cover_type, $letter_type, $genres, $authors, $price, $description, $image_name);
                 echo json_encode([
