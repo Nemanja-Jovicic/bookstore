@@ -34,7 +34,7 @@ function authorFormValidation($first_name, $last_name)
 function publisherValidation($name)
 {
     $errorArray = [];
-    $regName = "/^[A-Z][a-z]{1,}(\s[A-Z][a-z]{1,}|\s[a-z]{1,})*$/";
+    $regName = "/^[A-ZČĆŠĐŽ][a-zčćšđž]{1,}(\[A-ZČĆŠĐŽ][a-zčćšđž]{1,}|\s[a-zčćšđž]{1,})*$/";
     inputFieldValidation("Naziv izdavaca nije u redu!", $errorArray, $name, $regName);
     return $errorArray;
 }
@@ -51,7 +51,7 @@ function editionValidation($publisher, $cover_type, $letter_type, $genres, $auth
 
 
     $regPrice = "/^[1-9]{1}[\d]{2,5}$/";
-    $regDescription = "/^[\p{L}\p{N}\s.,!?()'\"-:]{10,2000}$/u";
+    $regDescription = "/^[\p{L}\p{N}\s.,!?()'\"-:]{10,2000}$/um";
 
 
     inputSelectValidation($publisher, "Morate izabrati izdavaca!", $errors);
@@ -69,5 +69,18 @@ function editionValidation($publisher, $cover_type, $letter_type, $genres, $auth
     } else if ($image !== '') {
         inputFileValidaiton($image, ["Morate odabrati sliku!", "Slika nije u dobrom formatu!", "Velicina slike nije u redu!"], $errors);
     }
+    return $errors;
+}
+function contactValidation($first_name, $last_name, $email, $message)
+{
+    $errors = [];
+    $regFirstLastName = "/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/";
+    $regMessage  = " /^[\p{L}\p{N}\s.,!?()'\"-:]{10,2000}$/um";
+
+    inputFieldValidation("Ime nije u redu!", $errors, $first_name, $regFirstLastName);
+    inputFieldValidation("Prezime nije u redu!", $errors, $last_name, $regFirstLastName);
+    inputFieldValidation("Email nije u redu!", $errors, $email);
+    inputFieldValidation("Poruka nije u redu!", $errors, $message, $regMessage);
+
     return $errors;
 }
