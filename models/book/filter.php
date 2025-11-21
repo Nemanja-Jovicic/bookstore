@@ -7,10 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     try {
         require_once '../../config/connection.php';
+        if($keyword === " "){
+            $link = 0;
+        }
         echo json_encode([
             'data' => [
                 'data' => getAllBooks($link, $keyword),
-                'link' => $link,
+                'link' => count(getAllBooks($link, $keyword)) > 0 ? $link : 0,
                 'pages' => paginationBook($keyword)
             ]
         ]);
