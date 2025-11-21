@@ -1,5 +1,5 @@
 <?php
-    $code = $_GET['code'];
+    $code = isset($_GET['code']) ? $_GET['code'] : 404;
     $redirection = unAuthorizedError($code);
 ?>
 <div class="container">
