@@ -255,6 +255,7 @@ const bookTransformDataIntoFormData = (objData, objFormData) => {
         document.querySelector(".page-link.active").dataset.link
       )
     : "";
+  objFormData.append("key", document.querySelector("#keyword").value);
 };
 
 const editionObj = (objData) => {
@@ -328,6 +329,7 @@ const editionTransformDataIntoFormData = (objData, objFormData) => {
 
 // print functions
 const printAllData = (arrayOfData, entity, pageIndex = 0) => {
+  console.log(arrayOfData);
   let content = "",
     index = pageIndex * 5;
   if (arrayOfData.length > 0) {
@@ -387,40 +389,22 @@ const printData = (data, index, entity, action = "") => {
 const filterData = (pageLink = 0, entity, obj) => {
   const { objData, objFormData } = obj;
   removeFromObj(objFormData);
-  if (entity === "book") {
-    let key = document.querySelector("#keyword").value;
-    let pageL = document.querySelector(".page-link.active");
-    if (document.contains(pageL)) {
-      link = pageL.dataset.link;
-    } else {
-      link = 0;
-    }
-    localStorage.setItem("link", link);
 
-    objFormData.append("link", link);
+  if (document.contains(document.querySelector("#keyword"))) {
+    let key = document.querySelector("#keyword").value;
     objFormData.append("key", key);
+    objFormData.append("link", pageLink);
+    localStorage.setItem('key', key)
+    localStorage.setItem('link', pageLink)
   } else {
-    localStorage.setItem("link", pageLink.dataset.link);
-    objFormData.append("link", pageLink.dataset.link);
+    objFormData.append("link", pageLink);
   }
+
   let url = `models/${entity}/filter.php`;
   sendGetRequest(url, objFormData);
 };
 
-const connectFilter = (adminObj) => {
-  if (localStorage.getItem("key") !== null) {
-    console.log(document.querySelector("#keyword"));
-    document.querySelector("#keyword").value = localStorage.getItem("key");
-  }
-  if (localStorage.getItem("link")) {
-    let links = document.querySelectorAll(".page-item");
-    links.forEach((link) => link.classList.remove(".active"));
-    let link =
-      localStorage.getItem("link") !== null ? localStorage.getItem("link") : 0;
-    links[link].classList.add("active");
-  }
-  filterData(localStorage.getItem("link"), "book", adminObj);
-};
+const connectFilter = (adminObj) => {};
 
 const clearLocalStorage = () => {
   localStorage.getItem("key") !== null ? localStorage.removeItem("key") : "";
